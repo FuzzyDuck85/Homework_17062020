@@ -1,27 +1,24 @@
 <template lang="html">
-  <div class="">
-    <select v-model="selectedCountry" v-on:change="handleChange">
-      <option v-for="(country, index) in countries" :country="country" :key="index"></option>
+  <div>
+    <select v-model="selectedCountry" v-on:change="handleChange" >
+      <option v-for="(country, index) in countries" :value="country" :key="index" >{{ country.name }}</option>
     </select>
   </div>
 </template>
 
 <script>
-import {eventBus} from '../main.js'
+import { eventBus } from '../main.js';
 export default {
-  name: 'countries-list',
+  name: 'country-select',
   props: ['countries'],
-  components: {
-    "list-item": ListItem
-  },
   data(){
-    return{
-      selectedCountry: null
+    return {
+      selectedChange: null
     }
   },
   methods: {
     handleChange(){
-      eventBus$emit('country-select', this.selectedCountry)
+      eventBus.$emit('country-selected', this.selectedCountry)
     }
   }
 }
